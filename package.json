@@ -1,10 +1,15 @@
 {
-  "name": "react-native-wheel-color-picker",
-  "version": "1.2.0",
+  "name": "@loopsocial/react-native-wheel-color-picker",
+  "version": "1.2.1",
   "description": "A color picker component for react native",
   "main": "ColorPicker.js",
   "homepage": "https://github.com/naeemur/react-native-wheel-color-picker#readme",
   "license": "MIT",
+  "scripts": {
+    "debug:publish": "yalc publish",
+    "debug:watch": "nodemon -x yalc push",
+    "debug:push": "yalc push"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/naeemur/react-native-wheel-color-picker.git"
@@ -14,6 +19,9 @@
   },
   "dependencies": {
     "react-native-elevation": "^1.0.0"
+  },
+  "devDependencies": {
+    "yalc": "^1.0.0-pre.53"
   },
   "keywords": [
     "react-native",
