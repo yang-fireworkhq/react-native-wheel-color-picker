@@ -397,24 +397,28 @@ module.exports = class ColorPicker extends Component {
      * x and y are the distances to its previous element
      * but in measureInWindow they are relative to the window
      */
-    this.wheel.measureInWindow((x, y, width, height) => {
-      this.wheelMeasure = { x, y, width, height };
-      this.wheelSize = width;
-      // this.panX.setOffset(-width/2)
-      // this.panY.setOffset(-width/2)
-      this.update(this.state.currentColor);
-      this.setState({ wheelOpacity: 1 });
-    });
+    setTimeout(() => {
+      this.wheel.measureInWindow((x, y, width, height) => {
+        this.wheelMeasure = { x, y, width, height };
+        this.wheelSize = width;
+        // this.panX.setOffset(-width/2)
+        // this.panY.setOffset(-width/2)
+        this.update(this.state.currentColor);
+        this.setState({ wheelOpacity: 1 });
+      });
+    }, 100);
   };
   onSliderLayout = (e) => {
-    this.slider.measureInWindow((x, y, width, height) => {
-      this.sliderMeasure = { x, y, width, height };
-      this.sliderLength = this.props.row ? height - width : width - height;
-      // this.slideX.setOffset(-width/2)
-      // this.slideY.setOffset(-width/2)
-      this.update(this.state.currentColor);
-      this.setState({ sliderOpacity: 1 });
-    });
+    setTimeout(() => {
+      this.slider.measureInWindow((x, y, width, height) => {
+        this.sliderMeasure = { x, y, width, height };
+        this.sliderLength = this.props.row ? height - width : width - height;
+        // this.slideX.setOffset(-width/2)
+        // this.slideY.setOffset(-width/2)
+        this.update(this.state.currentColor);
+        this.setState({ sliderOpacity: 1 });
+      });
+    }, 100);
   };
   outOfBox(measure, gestureState) {
     const { x, y, width, height } = measure;
@@ -540,15 +544,15 @@ module.exports = class ColorPicker extends Component {
       stt.hueSaturation = hsv2Hex(this.color.h, this.color.s, 100);
       // this.setState({hueSaturation: hsv2Hex(this.color.h,this.color.s,100)})
     }
-    stt.currentColor = hsv2Hex(hsv);
+    stt.currentColor = color;
     this.setState(stt, (x) => {
       this.tryForceUpdate();
       this.renderDiscs();
     });
     // this.setState({currentColor:hsv2Hex(hsv)}, x=>this.tryForceUpdate())
-    this.props.onColorChange(hsv2Hex(hsv));
+    this.props.onColorChange(color);
     if (this.props.onColorChangeComplete)
-      this.props.onColorChangeComplete(hsv2Hex(hsv));
+      this.props.onColorChangeComplete(color);
     if (who_hs || !specific) {
       this.panY.setValue(top); // - this.props.thumbSize / 2)
       this.panX.setValue(left); // - this.props.thumbSize / 2)
